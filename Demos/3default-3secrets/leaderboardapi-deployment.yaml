@@ -1,0 +1,34 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: leaderboard-api
+spec:  
+  replicas: 3
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: leaderboardwebapi
+        image: clouddemo.azurecr.io/leaderboardwebapi:458   
+        env:        
+        - name: Serilog__MinimumLevel__Default
+          value: "Warning"
+        - name: ConnectionStrings__LeaderboardContext
+          valueFrom:
+            secretKeyRef:
+              name: sqlserver
+              key: connectionstring
+        ports:
+        - containerPort: 80         
+      imagePullSecrets:
+      - name: clouddemoimages
+
+

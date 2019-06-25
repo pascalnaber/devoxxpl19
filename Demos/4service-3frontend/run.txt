@@ -1,0 +1,2 @@
+kubectl apply -f ./Demos/4service-3frontend/gamingwebapp-deployment.yaml
+kubectl apply -f ./Demos/4service-3frontend/gamingwebapp-service.yaml

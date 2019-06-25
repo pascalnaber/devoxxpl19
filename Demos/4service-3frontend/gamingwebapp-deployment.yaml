@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: gamingwebapp
+  namespace: servicedemo
+spec:  
+  replicas: 5
+  minReadySeconds: 5
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: gamingwebapp
+        image: clouddemo.azurecr.io/gamingwebapp:455   
+        env:        
+        - name: LeaderboardWebApiBaseUrl
+          value: "http://leaderboardapi-service"        
+        ports:
+        - containerPort: 80          
+      imagePullSecrets:
+      - name: clouddemoimages
+
+

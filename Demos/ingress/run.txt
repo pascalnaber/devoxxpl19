@@ -1,0 +1,18 @@
+
+kubectl create namespace ingressdemo
+
+## create secret in k8s to access the acr
+kubectl create secret docker-registry clouddemoimages --namespace ingressdemo 
+
+kubectl apply -f ./Demos/ingress/leaderboardapi-deployment.yaml
+kubectl apply -f ./Demos/ingress/leaderboardapi-service.yaml
+kubectl apply -f ./Demos/ingress/gamingwebapp-deployment.yaml
+kubectl apply -f ./Demos/ingress/gamingwebapp-service.yaml
+kubectl apply -f ./Demos/ingress/secret.yaml
+
+
+
+kubectl apply -f ./Demos/ingress/gamingwebapp-ingress.yaml
+
+
+kubectl apply -f ./Demos/ingress/gamingwebapp-ingress-tls.yaml

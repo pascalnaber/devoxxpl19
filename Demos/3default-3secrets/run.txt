@@ -1,0 +1,2 @@
+kubectl apply -f C:\repos\pascal\clouddemo\Demos\3default-3secrets\leaderboardapi-deployment.yaml
+

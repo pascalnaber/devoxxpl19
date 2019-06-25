@@ -1,0 +1,7 @@
+
+kubectl get hpa -n horizontalscaling
+
+kubectl run -n horizontalscaling -i --tty load-generator --image=busybox /bin/sh
+
+
+while true; do wget -q -O- http://leaderboard-api-svc.horizontalscaling; done

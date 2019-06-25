@@ -1,0 +1,1 @@
+kubectl apply -f ./Demos/3default-5resource/leaderboardapi-deployment.yaml

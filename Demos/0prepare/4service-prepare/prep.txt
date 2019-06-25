@@ -1,0 +1,5 @@
+kubectl create namespace servicedemo
+
+kubectl apply -f ./Demos/0prepare/4service-prepare/secret.yaml
+
+kubectl create secret docker-registry clouddemoimages --namespace servicedemo 

@@ -1,0 +1,3 @@
+kubectl create namespace horizontalscaling
+
+kubectl apply -f ./Demos/hpa/horizontalscaling.yaml

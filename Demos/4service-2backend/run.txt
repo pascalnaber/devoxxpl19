@@ -1,0 +1,2 @@
+kubectl apply -f ./Demos/4service-2backend/leaderboardapi-deployment.yaml
+kubectl apply -f ./Demos/4service-2backend/leaderboardapi-service.yaml

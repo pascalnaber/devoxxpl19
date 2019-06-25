@@ -1,0 +1,55 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+    name: leaderboard-api
+    namespace: horizontalscaling
+spec:
+    replicas: 1
+    template:
+        metadata:
+            name: leaderboard-api
+            labels:
+                app: backend
+        spec:
+            containers:
+            - name: leaderboard-api
+              image: k8s.gcr.io/hpa-example
+              ports:
+              - name: http-port
+                containerPort: 80
+              resources:
+                requests:
+                  cpu: 100m
+                  
+                limits:
+                  cpu: 300m
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: leaderboard-api-svc
+    namespace: horizontalscaling
+spec:
+    type: ClusterIP
+    selector:
+        app: backend
+    ports:
+    - port: 80
+---
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: leaderboard-api-autoscaler
+  namespace: horizontalscaling
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: leaderboard-api
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      targetAverageUtilization: 50
